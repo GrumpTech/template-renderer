@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="{{language}}">
+  <head>
+    <title>{{title}}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <style type="text/css">
+      .container {
+        background-color: #f6f6f6;
+        width: 100%;
+      }
+      .email-container {
+        padding: 10px 20px 10px 20px;
+        min-width: 580px;
+        max-width: 720px;
+        width: 100%;
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <table
+        border="0"
+        cellpadding="0"
+        height="100"
+        width="100%"
+        class="container"
+      >
+        <tr>
+          <td align="center" valign="top">
+            <table
+              border="0"
+              cellpadding="0"
+              cellspacing="0"
+              class="email-container"
+            >
+              <tr>
+                <td align="left" valign="middle">
+                  <p>{{title}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td align="left" valign="top">
+                  <p>{{> content}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td align="left" valign="middle">
+                  <p>{{footer}}</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </center>
+  </body>
+</html>

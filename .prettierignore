@@ -1,0 +1,4 @@
+tests/email.html
+tests/image.html
+tests/pagedjs.html
+tests/pagedjs/paged.polyfill.min.js
