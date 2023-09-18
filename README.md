@@ -1,17 +1,6 @@
 # Template renderer
 
-A combination of three remarkable open source projects makes it easy to create PDF documents from HTML templates. With only a few lines of code Puppeteer and mustache.js can be combined to create PDF's from HTML. This is demonstrated in template-renderer.js. Paged.js can be used to create documents with a table of contents and page numbers. This is demonstrated in tests/pagedjs/pagedjs.html.
-
-Creating PDF's is a common task in software development. This repository shows a free and open source alternative to commercial packages like Aspose.Pdf or Exstream.
-
-## Security
-
-Some remarks concerning security.
-
-- Ensure user input is validated.
-- Ensure the npm packages and docker image are up to date.
-- Only allow access from trusted services. This is often achieved using json web tokens. Thanks to the package [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) this was easily implemented in template-renderer.js.
-- For serving over https see <https://expressjs.com/en/5x/api.html#app.listen> and <https://nodejs.org/api/https.html#httpscreateserveroptions-requestlistener>.
+Creating PDF documents is a common task in software development. This repository shows how to create PDF's from HTML templates with the help of three remarkable open source projects. It shows a free and open source alternative to commercial software like Aspose.Pdf or Exstream.
 
 ## General information
 
@@ -24,10 +13,8 @@ License: See project, Apache License 2.0 at time of writing
 
 ### mustache.js
 
-An open source javascript library to render mustache templates.\
-<https://github.com/janl/mustache.js>\
-<https://mustache.github.io>\
-License: See project, MIT License at time of writeing
+An open source javascript library to render mustache templates. The [mustache template syntax](https://github.com/janl/mustache.js#templates) is explained in the [mustache.js github repository](https://github.com/janl/mustache.js#templates). The mustache template engine is [widely available](https://mustache.github.io).\
+License: See project, MIT License at time of writing
 
 ### Paged.js
 
@@ -37,6 +24,11 @@ An open source library to paginate HTML content for printing to PDF. This librar
 <https://ashok-khanna.medium.com/beautiful-pdfs-from-html-9a7a3c565404>\
 <https://www.adamhyde.net/some-pagedjs-info>\
 License: See project, MIT license at time of writing
+
+### Implementation
+
+- template-renderer.js - Combines Puppeteer and mustache.js with just a few lines to create PDF's from mustache HTML templates.
+- tests/pagedjs/pagedjs.html - Uses Paged.js to create a document with a table of contents and page numbers.
 
 ### Typesetting with CSS
 
@@ -51,26 +43,36 @@ Browsers provide some interesting options for typesetting. For example the follo
 
 **Note:** It seems that Puppeteer does not yet handle hyphens correctly. Two possible workarrounds are [hyphen](https://www.npmjs.com/package/hyphen) (node) and [Hyphenopoly](https://github.com/mnater/Hyphenopoly) (browser).
 
+## Security
+
+Some remarks concerning security.
+
+- Ensure user input is validated.
+- Ensure the npm packages and docker image are up to date.
+- Only allow access from trusted services. This is often achieved using json web tokens. Thanks to the package [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) this was easily implemented in template-renderer.js.
+- For serving over https see <https://expressjs.com/en/5x/api.html#app.listen> and <https://nodejs.org/api/https.html#httpscreateserveroptions-requestlistener>.
+
+
 ## Getting started
 
 ### Npm commands
 
-See package.json for some scripts to run, build and test template-renderer.js and some example templates.
+See package.json for scripts to run, build and test template-renderer.js and some example templates.
 
-- Run `npm run generate-keys jwt` to create a private and public key used by template-renderer.js for validating JWT's.
+- Run `npm run generate-keys jwt` to create a private and public key. The public key is used by template-renderer.js for validating JWT's.
 - Run `npm run start:test` to serve template-renderer.js on port 5000 and a HTML test page on port 5021. See tests directory for some templates which can be used for testing.
 
 ### Docker image
 
-See <https://pptr.dev/guides/docker> and <https://github.com/puppeteer/puppeteer/tree/main/docker> for more information.
+A Dockerfile is included in this is repository. See <https://pptr.dev/guides/docker> and <https://github.com/puppeteer/puppeteer/tree/main/docker> for more information.
 
 ### Some example templates
 
 - tests/a4-pages.html
-- tests/email.html
-- tests/image.html
+- tests/email
+- tests/image
 - tests/mustache.html
-- tests/pagedjs.html
+- tests/pagedjs
 
 ### Validating JWKS tokens
 
@@ -110,23 +112,23 @@ _For local testing -_ Extra self-signed certificate(s) can be provided with a no
 
 ## Packages
 
-- Puppeteer: library providing control to Chrome or Chromium
-- mustache.js: library to render mustache templates
-- Paged.js: library to paginate HTML content for printing to PDF
-- winston: a simple logging library with support for multiple transports
-- jsonwebtoken: an implementation of JSON Web Tokens use for signing and verifying JWT's
-- jwks-rsa: a library to retrieve signing keys from a JWKS endpoint
+- Puppeteer - library providing control to Chrome or Chromium
+- mustache.js - library to render mustache templates
+- Paged.js - library to paginate HTML content for printing to PDF
+- winston - a simple logging library with support for multiple transports
+- jsonwebtoken - an implementation of JSON Web Tokens used for signing and verifying JWT's
+- jwks-rsa - a library to retrieve signing keys from a JWKS endpoint
 
 ### Packages for testing
 
-- axios: node package for http requests
-- http-server: serve files to test HTML locally
-- json5: for parsing json written by hand
-- juice: inline web resources (styles, scripts, images)
-- nodemon: run script and restart when changed
-- npm-run-all: run multiple npm scripts with one command
-- web-resource-inliner: inline web resources without any changes (preserves all Paged.js styles)
+- axios - node package for http requests
+- http-server - serve files locally for testing
+- json5 - for parsing json written by hand
+- juice - inline web resources (styles, scripts, images)
+- nodemon - run script and restart when changed
+- npm-run-all - run multiple npm scripts with one command
+- web-resource-inliner - inline web resources without any changes (preserves all Paged.js styles)
 
 ### Package for formatting
 
-- prettier: opinionated code formatter (run with `npx prettier . --check` or `npx prettier . --write`)
+- prettier - opinionated code formatter (run with `npx prettier . --check` or `npx prettier . --write`)
