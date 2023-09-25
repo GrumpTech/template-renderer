@@ -1,6 +1,6 @@
 # Template renderer
 
-Creating PDF documents is a common task in software development. This repository shows how to create PDF's from HTML templates with the help of three remarkable open source projects. It shows a free and open source alternative to commercial software like Aspose.Pdf or Exstream.
+Creating PDF documents is a common task in software development. This repository shows how to create PDF's from HTML templates using three remarkable open source projects. It shows a free and open source alternative to commercial software like Aspose.Pdf or Exstream.
 
 ## General information
 
@@ -25,10 +25,10 @@ An open source library to paginate HTML content for printing to PDF. This librar
 <https://www.adamhyde.net/some-pagedjs-info>\
 License: See project, MIT license at time of writing
 
-### Implementation
+### Source code
 
-- template-renderer.js - Combines Puppeteer and mustache.js with just a few lines to create PDF's from mustache HTML templates.
-- tests/pagedjs/pagedjs.html - Uses Paged.js to create a document with a table of contents and page numbers.
+- [template-renderer.js](/template-renderer.js) - Combines Puppeteer and mustache.js with just a few lines of code in order to create PDF's from mustache HTML templates.
+- [tests/pagedjs/pagedjs.html](/tests/pagedjs/pagedjs.html) - Uses Paged.js to create a document with a table of contents and page numbers.
 
 ### Typesetting with CSS
 
@@ -41,7 +41,7 @@ Browsers provide some interesting options for typesetting. For example the follo
 - **text-align: justify** - align text to the left and right edges of lines, except at the last line
 - **hyphens: auto** - words are hyphenated according to language-specific hyphenation rules, where the language should be specified with a lang attribute
 
-**Note:** It seems that Puppeteer does not yet handle hyphens correctly. Two possible workarrounds are [hyphen](https://www.npmjs.com/package/hyphen) (node) and [Hyphenopoly](https://github.com/mnater/Hyphenopoly) (browser).
+**Note:** It seems that Puppeteer does not yet handle hyphens correctly. Two possible workarounds are [hyphen](https://www.npmjs.com/package/hyphen) (node) and [Hyphenopoly](https://github.com/mnater/Hyphenopoly) (browser).
 
 ## Security
 
@@ -51,7 +51,6 @@ Some remarks concerning security.
 - Ensure the npm packages and docker image are up to date.
 - Only allow access from trusted services. This is often achieved using json web tokens. Thanks to the package [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) this was easily implemented in template-renderer.js.
 - For serving over https see <https://expressjs.com/en/5x/api.html#app.listen> and <https://nodejs.org/api/https.html#httpscreateserveroptions-requestlistener>.
-
 
 ## Getting started
 
@@ -97,7 +96,7 @@ function createTokenValidationFunction(url, requiredScope) {
     function getKey(header, callback) {
       client.getSigningKey(header.kid, function (err, key) {
         if (err) {
-          logger.error({ message: err });
+          logger.error({ message: err.message });
         }
         var signingKey = key?.publicKey || key?.rsaPublicKey;
         callback(null, signingKey);

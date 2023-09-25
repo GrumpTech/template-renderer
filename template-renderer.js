@@ -80,15 +80,17 @@ function sanatizeInput(data) {
   return { template, data: data.data, partials };
 }
 
-function logHandler(req, _res, next) {
-  const logInfo = { requestPath: req.path, traceId: req.headers.traceId };
+function logHandler(req, res, next) {
+  const logInfo = { requestPath: req.path, traceId: getTraceId(req) };
   logger.info({ message: "Started handling request", ...logInfo });
+  res.on("finish", () => {
+    logger.info({ message: "Finished handling request", ...logInfo });
+  });
   next();
-  logger.info({ message: "Finished handling request", ...logInfo });
 }
 
 async function tokenHandler(req, res, next) {
-  const logInfo = { requestPath: req.path, traceId: req.headers.traceId };
+  const logInfo = { requestPath: req.path, traceId: getTraceId(req) };
   const validationResult = await validateToken(getBearerToken(req));
   if (!validationResult.valid) {
     logger.warn({ message: validationResult.message, ...logInfo });
@@ -108,6 +110,15 @@ function getBearerToken(req) {
     return "";
   }
   return parts[0] === "Bearer" ? parts[1] : "";
+}
+
+function getTraceId(req) {
+  const traceparent = req.headers.traceparent;
+  const parts = traceparent?.split("-");
+  if (parts?.length >= 2) {
+    return parts[1];
+  }
+  return traceparent;
 }
 
 function createTokenValidationFunction(filename, requiredScope) {
@@ -131,7 +142,7 @@ function verifyToken(token, secretOrPublicKey, requiredScope) {
   return new Promise((resolve) => {
     jwt.verify(token, secretOrPublicKey, function (err, decoded) {
       if (err) {
-        resolve({ valid: false, message: err });
+        resolve({ valid: false, message: err.message });
       } else if (
         Array.isArray(decoded.scope) &&
         decoded.scope.indexOf(requiredScope) !== -1
