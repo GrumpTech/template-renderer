@@ -3,8 +3,8 @@ const puppeteer = require("puppeteer");
 const mustache = require("mustache");
 const fs = require("fs");
 const os = require("os");
-const jwt = require("jsonwebtoken");
 const winston = require("winston");
+const jwt = require("jsonwebtoken");
 
 const logger = winston.createLogger({
   level: "info",
@@ -20,7 +20,7 @@ const app = express();
 app.use(express.text({ limit: "8mb" }));
 app.use(express.json({ limit: "8mb" }));
 app.use(logHandler);
-app.use(tokenHandler); // validate Bearer token
+app.use(tokenHandler); // validate bearer token
 
 const validateToken = createTokenValidationFunction(
   "keys/jwt-public.key",
@@ -47,12 +47,12 @@ app.listen(5000, () => {
 });
 
 async function createPdf(data) {
-  const browser = await puppeteer.launch({ headless: "new" });
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.setContent(data);
 
   // allow page to run javascript before creating pdf
-  await page.waitForFunction("window.readyForPdfPuppeteer !== false");
+  await page.waitForFunction("window.readyForPdf !== false");
 
   const pdf = await page.pdf({
     format: "a4",
@@ -66,7 +66,7 @@ async function createPdf(data) {
     },
   });
   await browser.close();
-  return pdf;
+  return Buffer.from(pdf);
 }
 
 function sanatizeInput(data) {
@@ -101,6 +101,15 @@ async function tokenHandler(req, res, next) {
   next();
 }
 
+function getTraceId(req) {
+  const traceparent = req.headers.traceparent;
+  const parts = traceparent?.split("-");
+  if (parts?.length >= 2) {
+    return parts[1];
+  }
+  return traceparent;
+}
+
 function getBearerToken(req) {
   if (typeof req.headers.authorization !== "string") {
     return "";
@@ -110,15 +119,6 @@ function getBearerToken(req) {
     return "";
   }
   return parts[0] === "Bearer" ? parts[1] : "";
-}
-
-function getTraceId(req) {
-  const traceparent = req.headers.traceparent;
-  const parts = traceparent?.split("-");
-  if (parts?.length >= 2) {
-    return parts[1];
-  }
-  return traceparent;
 }
 
 function createTokenValidationFunction(filename, requiredScope) {

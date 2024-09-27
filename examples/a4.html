@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>{{htmlTitleTag}}</title>
+    <style>
+@page {
+  margin: 1in;
+  size: A4;
+}
+p {
+  text-align: justify;
+  hyphens: auto;
+}
+h1,
+h2 {
+  break-before: page;
+}
+h3,
+h4 {
+  break-before: avoid-page;
+}
+
+</style>
+  </head>
+  <body>
+    {{> template}}
+  </body>
+</html>

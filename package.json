@@ -2,32 +2,25 @@
   "scripts": {
     "start": "nodemon template-renderer.js",
     "build:image": "docker build . -t template-renderer",
-    "build:test-email": "npm run juice tests/email/email.html tests/email.html",
-    "build:test-pagedjs": "npm run inliner tests/pagedjs/pagedjs.html tests/pagedjs.html",
-    "build:test-image": "npm run juice tests/image/image.html tests/image.html",
-    "start:image": "docker run -it  -p 5020:5000 --rm --name template-renderer --init --cap-add=SYS_ADMIN template-renderer",
+    "start:image": "docker run -it  -p 5000:5000 --rm --name template-renderer --init --cap-add=SYS_ADMIN template-renderer",
     "start:test-page": "nodemon utils/test-page.js",
     "start:http-server": "http-server",
     "start:test": "nodemon --exec run-p start start:test-page",
-    "juice": "juice",
-    "inliner": "node utils/web-resource-inliner.js",
     "generate-keys": "node utils/generate-keys.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
+    "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2",
     "mustache": "^4.2.0",
-    "puppeteer": "^21.0.3",
-    "winston": "^3.10.0"
+    "puppeteer": "^23.4.0",
+    "winston": "^3.14.2"
   },
   "devDependencies": {
-    "axios": "^1.4.0",
+    "axios": "^1.7.7",
     "http-server": "^14.1.1",
     "json5": "^2.2.3",
-    "juice": "^9.1.0",
-    "nodemon": "^3.0.1",
+    "nodemon": "^3.1.7",
     "npm-run-all": "^4.1.5",
-    "prettier": "^3.0.3",
-    "web-resource-inliner": "^6.0.1"
+    "prettier": "^3.3.3"
   }
 }

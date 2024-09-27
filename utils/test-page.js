@@ -21,7 +21,7 @@ app.post("/test", async (req, res) => {
   let template = "";
   try {
     template = fs.readFileSync(
-      `${__dirname}/../tests/${input.filename}`,
+      `${__dirname}/../examples/${input.filename}`,
       "utf8",
     );
   } catch (error) {
@@ -31,7 +31,7 @@ app.post("/test", async (req, res) => {
   try {
     for (var key in input.partials) {
       partials[key] = fs.readFileSync(
-        `${__dirname}/../tests/${input.partials[key]}`,
+        `${__dirname}/../examples/${input.partials[key]}`,
         "utf8",
       );
     }
@@ -94,8 +94,7 @@ app.get("", async (_req, res) => {
 {
   "filename": "mustache.html",
   "data": {
-    "language": "en",
-    "title": "Title",
+    "documentTitle": "Title",
     "value": "test",
     "array": ["a", "b", "c"],
     "arrayOfObjects": [
@@ -106,8 +105,7 @@ app.get("", async (_req, res) => {
   },
   "partials": {
     "partial": "partial-mustache.html",
-    "content": "partial-lorem-ipsum.html",
-    "hyphens": "partial-hyphen-test.html"
+    "template": "partial-lorem-ipsum.html"
   }
 }
         </textarea>

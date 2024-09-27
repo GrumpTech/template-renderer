@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="{{language}}">
+<html lang="en">
   <head>
-    <title>{{title}}</title>
+    <title>{{htmlTitleTag}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width">
     
@@ -14,17 +14,17 @@
             <table border="0" cellpadding="0" cellspacing="0" class="email-container" style="padding: 10px 20px 10px 20px; min-width: 580px; max-width: 720px; width: 100%; background-color: white;" width="100%" bgcolor="white">
               <tr>
                 <td align="left" valign="middle">
-                  <p>{{title}}</p>
+                  <p style="text-align: justify; hyphens: auto;">{{header}}</p>
                 </td>
               </tr>
               <tr>
                 <td align="left" valign="top">
-                  <p>{{> content}}</p>
+                  <p style="text-align: justify; hyphens: auto;">{{> template}}</p>
                 </td>
               </tr>
               <tr>
                 <td align="left" valign="middle">
-                  <p>{{footer}}</p>
+                  <p style="text-align: justify; hyphens: auto;">{{footer}}</p>
                 </td>
               </tr>
             </table>
