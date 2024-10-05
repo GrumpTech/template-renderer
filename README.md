@@ -1,6 +1,17 @@
 # template-renderer
 
-This small demo project generates PDFs from HTML templates.
+This small demo project shows a way to generate PDFs from [mustache](https://github.com/janl/mustache.js#templates) HTML templates using [puppeteer](https://pptr.dev) and [mustache.js](https://github.com/janl/mustache.js).
+
+## Puppeteer
+
+Puppeteer is an open-source Node.js library providing control to Chrome or Chromium used for automated testing and creating PDFs from HTML. Puppeteer is maintained by the Chrome DevTools team.\
+<https://pptr.dev>\
+<https://github.com/puppeteer/puppeteer>
+
+## Mustache.js
+
+An open-source JavaScript library to render mustache templates. The [mustache template syntax](https://github.com/janl/mustache.js#templates) supports variables, conditional templates, repeatable sections and inclusion of other templates. The mustache template engine is [widely available](https://mustache.github.io/).\
+https://github.com/janl/mustache.js
 
 ## Security
 
@@ -29,7 +40,7 @@ A [Dockerfile](/Dockerfile) is included in this repository. See <https://pptr.de
 ### Source code
 
 - [template-renderer.js](/template-renderer.js) - Combines Puppeteer and mustache.js with a few lines of code in order to create PDFs from mustache HTML templates.\
-The service waits until `window.readyForPdf != false`. This way the template can run JavaScript before it's rendered.
+  The service waits until `window.readyForPdf != false`. This way the template can run JavaScript before it's rendered.
 - [generate-keys.js](/utils/generate-keys.js) - Generates a private and public key.
 - [test-page.js](/utils/test-page.js) - Serves a test page for testing [template-renderer.js](/template-renderer.js).
 
