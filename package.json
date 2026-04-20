@@ -1,0 +1,35 @@
+{
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "watch": "nodemon",
+    "build": "tsc",
+    "benchmark": "node benchmarks/template-renderer.js",
+    "build:image": "tsc && docker build . -t template-renderer",
+    "start:image": "docker run -it  -p 5000:5000 --rm --name template-renderer template-renderer",
+    "start:test-page": "node utils/test-page.js",
+    "generate-keys": "node utils/generate-keys.js",
+    "test": "ts-mocha test/**/*.ts"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mustache": "^4.2.0",
+    "playwright": "^1.52.0",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/mocha": "^10.0.10",
+    "@types/mustache": "^4.2.5",
+    "@types/sinon": "^17.0.4",
+    "axios": "^1.9.0",
+    "json5": "^2.2.3",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.5.3",
+    "sinon": "^20.0.0",
+    "tinybench": "^4.0.1",
+    "ts-mocha": "^11.1.0",
+    "ts-node": "^10.9.2"
+  }
+}

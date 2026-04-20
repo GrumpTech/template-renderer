@@ -1,0 +1,28 @@
+<h1>Mustache.js template</h1>
+
+Simple template to test basic usage of mustache.js.
+
+<h2>Value</h2>
+
+Value: {{value}}<br />
+{{^value}}Key value not provided in data.{{/value}}
+
+<h2>Array</h2>
+
+{{#array}} value: {{.}}<br />
+{{/array}} {{^array}}Key array not provided in data.{{/array}}
+
+<h2>Array of objects</h2>
+
+{{#arrayOfObjects}} {{#value}}value: {{.}} {{/value}} {{^value}}Key value not
+provided in arrayOfObjects.{{/value}}<br />
+{{/arrayOfObjects}} {{^arrayOfObjects}}Key array of objects not provided in
+data({{/arrayOfObjects}}
+
+<h2>Partial</h2>
+
+Partials are rendered with the data from the current context.<br /><br />
+
+{{> partial}}<br />
+
+{{#arrayOfObjects}} {{> partial}} {{/arrayOfObjects}}
